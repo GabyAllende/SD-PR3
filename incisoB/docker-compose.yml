@@ -12,34 +12,34 @@ services:
         condition: on-failure
       placement:
         constraints: [node.role == manager]
-  # publisher:
-  #   image: image-publisher:1.0.0
-  #   environment:
-  #     - HOST=broker
-  #     - PORT=1883
-  #     - TOPIC=libros/comedia
-  #   deploy:
-  #     replicas: 5
-  #     restart_policy:
-  #       condition: on-failure
-  #     placement:
-  #       constraints: [node.role == manager]
-  #   depends_on:
-  #     - broker
-  # subscriber:
-  #   image: image-subscriber:1.0.0
-  #   environment:
-  #     - port=21212
-  #     - topic=libros/comedia
-  #     - brokerip=research.upb.edu
-  #   deploy:
-  #     replicas: 5
-  #     restart_policy:
-  #       condition: on-failure
-  #     placement:
-  #       constraints: [node.role == worker]
-  #   depends_on:
-  #     - broker
+  publisher:
+    image: image-publisher:1.0.0
+    environment:
+      - HOST=broker
+      - PORT=1883
+      - TOPIC=libros/comedia
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+    depends_on:
+      - broker
+  subscriber:
+    image: image-subscriber:1.0.0
+    environment:
+      - port=21212
+      - topic=libros/comedia
+      - brokerip=research.upb.edu
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+    depends_on:
+      - broker
 
     
         
