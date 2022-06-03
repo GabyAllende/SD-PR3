@@ -7,6 +7,12 @@ services:
       - 1883:1883
     volumes:
       - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
   publisher:
     container_name: pub
     image: image-publisher:1.0.0
@@ -14,6 +20,14 @@ services:
       - BHOST=broker
       - BPORT=1883
       - BTOPIC=libros/comedia
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+    depends_on:
+      - broker
   subscriber:
     container_name: sub
     image: image-subscriber:1.0.0
@@ -21,6 +35,14 @@ services:
       - APORT=21212
       - ATOPIC=libros/comedia
       - ABROKERIP=research.upb.edu
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == worker]
+    depends_on:
+      - broker
 
     
         
