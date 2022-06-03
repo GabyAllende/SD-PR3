@@ -1,0 +1,26 @@
+version: "3.0"
+services:
+  broker:
+    container_name: broker
+    image: eclipse-mosquitto 
+    ports:
+      - 1883:1883
+    volumes:
+      - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  publisher:
+    container_name: pub
+    image: image-publisher:1.0.0
+    environment:
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/comedia
+  subscriber:
+    container_name: sub
+    image: image-subscriber:1.0.0
+    environment:
+      - APORT=21212
+      - ATOPIC=libros/comedia
+      - ABROKERIP=research.upb.edu
+
+    
+        
