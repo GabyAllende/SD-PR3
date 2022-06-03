@@ -17,9 +17,9 @@ services:
     container_name: pub
     image: image-publisher:1.0.0
     environment:
-      - BHOST=broker
-      - BPORT=1883
-      - BTOPIC=libros/comedia
+      - HOST=broker
+      - PORT=1883
+      - TOPIC=libros/comedia
     deploy:
       replicas: 5
       restart_policy:

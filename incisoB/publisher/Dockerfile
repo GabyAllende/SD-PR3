@@ -11,12 +11,10 @@ RUN npm install
 
 COPY . .
 
-ARG BTOPIC='libros'
-ARG BPORT=1883
-ARG BHOST='broker'
-ENV TOPIC ${BTOPIC}
-ENV PORT ${BPORT}
-ENV HOST ${BHOST}
+
+ENV TOPIC='libros'
+ENV PORT=1883
+ENV HOST='broker'
 
 
 
