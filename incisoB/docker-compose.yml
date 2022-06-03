@@ -32,9 +32,9 @@ services:
     container_name: sub
     image: image-subscriber:1.0.0
     environment:
-      - APORT=21212
-      - ATOPIC=libros/comedia
-      - ABROKERIP=research.upb.edu
+      - port=21212
+      - topic=libros/comedia
+      - brokerip=research.upb.edu
     deploy:
       replicas: 5
       restart_policy:

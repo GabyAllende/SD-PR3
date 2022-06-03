@@ -7,11 +7,9 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-ARG ATOPIC='libros'
-ENV topic ${ATOPIC}
-ARG ABROKERIP='research.upb.edu'
-ENV brokerip ${ABROKERIP}
-ARG APORT=21212
-ENV port ${APORT}
+
+ENV topic='libros'
+ENV brokerip='research.upb.edu'
+ENV port=21212
 
 CMD [ "node", "index.js" ]
