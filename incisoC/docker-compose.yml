@@ -13,7 +13,7 @@ services:
       placement:
         constraints: [node.role == manager]
   publisher:
-    image: 127.0.0.1:5000/image-publisher:1.0.0
+    image: 127.0.0.1:5000/image-publisher
     environment:
       - HOST=broker
       - PORT=1883
@@ -27,7 +27,7 @@ services:
     depends_on:
       - broker
   subscriber:
-    image: 127.0.0.1:5000/image-subscriber:1.0.0
+    image: 127.0.0.1:5000/image-subscriber
     environment:
       - port=21212
       - topic=libros/comedia
