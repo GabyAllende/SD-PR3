@@ -1,49 +1,69 @@
 version: "3.0"
-services: 
-  subscriber1:
-    container_name: sub1
-    build:
-      context: .
+services:
+  broker:
+    container_name: broker
+    image: eclipse-mosquitto 
+    ports:
+      - 1883:1883
+    volumes:
+      - ./broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - mis-libros-net
+  publisher1:
+    container_name: pub1
+    build: 
+      context: ./publisher/
       dockerfile: Dockerfile
       args:
-        - APORT=21212
-        - ATOPIC=libros/comedia
-        - ABROKERIP=research.upb.edu
-  subscriber2:
-    container_name: sub2
-    build:
-      context: .
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/comedia
+    networks:
+      - mis-libros-net
+  publisher2:
+    container_name: pub2
+    build: 
+      context: ./publisher/
       dockerfile: Dockerfile
       args:
-        - APORT=21212
-        - ATOPIC=libros/fantasia
-        - ABROKERIP=research.upb.edu
-  subscriber3:
-    container_name: sub3
-    build:
-      context: .
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/fantasia
+    networks:
+      - mis-libros-net
+  publisher3:
+    container_name: pub3
+    build: 
+      context: ./publisher/
       dockerfile: Dockerfile
       args:
-        - APORT=21212
-        - ATOPIC=libros/romance
-        - ABROKERIP=research.upb.edu
-  subscriber4:
-    container_name: sub4
-    build:
-      context: .
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/romance
+    networks:
+      - mis-libros-net
+  publisher4:
+    container_name: pub4
+    build: 
+      context: ./publisher/
       dockerfile: Dockerfile
       args:
-        - APORT=21212
-        - ATOPIC=libros/suspenso
-        - ABROKERIP=research.upb.edu
-  subscriber5:
-    container_name: sub5
-    build:
-      context: .
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/terror
+    networks:
+      - mis-libros-net
+  publisher5:
+    container_name: pub5
+    build: 
+      context: ./publisher/
       dockerfile: Dockerfile
       args:
-        - APORT=21212
-        - ATOPIC=libros/terror
-        - ABROKERIP=research.upb.edu
-    
-        
+      - BHOST=broker
+      - BPORT=1883
+      - BTOPIC=libros/suspenso
+    networks:
+      - mis-libros-net
+networks:
+  mis-libros-net:
+    driver: bridge

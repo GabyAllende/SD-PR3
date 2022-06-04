@@ -1,0 +1,49 @@
+version: "3.0"
+services: 
+  subscriber1:
+    container_name: sub1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APORT=21212
+        - ATOPIC=libros/comedia
+        - ABROKERIP=research.upb.edu
+  subscriber2:
+    container_name: sub2
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APORT=21212
+        - ATOPIC=libros/fantasia
+        - ABROKERIP=research.upb.edu
+  subscriber3:
+    container_name: sub3
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APORT=21212
+        - ATOPIC=libros/romance
+        - ABROKERIP=research.upb.edu
+  subscriber4:
+    container_name: sub4
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APORT=21212
+        - ATOPIC=libros/suspenso
+        - ABROKERIP=research.upb.edu
+  subscriber5:
+    container_name: sub5
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APORT=21212
+        - ATOPIC=libros/terror
+        - ABROKERIP=research.upb.edu
+    
+        
